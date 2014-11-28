@@ -14,7 +14,7 @@ acl_tree_t* acl_new(void) {
 }
 
 static int dummy_free_leaf(acl_rule_t *rule) {
-	free(rule);
+    free(rule);
     return 1;
 }
 
@@ -48,7 +48,7 @@ static uint32_t parse_mask(char *str)
 static ipv4_cidr_t parse_cidr(char *str)
 {
     ipv4_cidr_t cidr;
-	uint32_t ip, mask;
+    uint32_t ip, mask;
     char *p = NULL;
 
     if (strcmp(str, "any") == 0) {
@@ -61,13 +61,13 @@ static ipv4_cidr_t parse_cidr(char *str)
     if (!p) {
         mask = 0xFFFFFFFF;
     } else {
-    	*p = '\0';
-    	mask = parse_mask(p + 1);
-	}
+        *p = '\0';
+        mask = parse_mask(p + 1);
+    }
 
     inet_pton(AF_INET, str, &ip);
-	cidr.ip = ntohl(ip) & mask;
-	cidr.mask = mask;
+    cidr.ip = ntohl(ip) & mask;
+    cidr.mask = mask;
 
     return cidr;
 }
@@ -76,10 +76,10 @@ int acl_add_rule2(acl_tree_t *tree, int action, char *ipstr)
 {
     acl_rule_t *rule = NULL;
 
-	rule = (acl_rule_t *)malloc(sizeof(acl_rule_t));
-	if (!rule) {
-		return 0;
-	}
+    rule = (acl_rule_t *)malloc(sizeof(acl_rule_t));
+    if (!rule) {
+        return 0;
+    }
 
     rule->cidr = parse_cidr(ipstr);
     rule->action = action;
@@ -91,7 +91,7 @@ int acl_lookup(acl_tree_t *tree, uint32_t ip)
 {
     acl_rule_t rule, *r;
 
-	rule.cidr.ip = ip;
+    rule.cidr.ip = ip;
     rule.cidr.mask = 0xFFFFFFFF;
 
     r = radix_get(tree, &rule, 0);

@@ -41,9 +41,9 @@ int tiksock_getopt(int argc, char **argv)
         case '?':
             if (optopt == 'f') {
                printf("Please specify tiksock.conf.\n");
-			}
+            }
         default:
-	    return 0;
+        return 0;
         }
     }
 
@@ -56,24 +56,24 @@ int tiksock_getopt(int argc, char **argv)
 
 int init()
 {
-	acl_db = acl_new();
+    acl_db = acl_new();
 
     if (!load_conf(tiksock_conf)) {
-		return 0;
+        return 0;
     }
 
     if (!log_open(log_file, log_level)) {
-		return 0;
+        return 0;
     }
 
-	return 1;
+    return 1;
 }
 
 int deinit()
 {
-	if (acl_db) {
-		acl_free(acl_db);
-	}
+    if (acl_db) {
+        acl_free(acl_db);
+    }
 
 }
 
@@ -83,29 +83,29 @@ int main(int argc, char **argv)
 
     if (!tiksock_getopt(argc, argv)) {
         print_usage();
-		return -1;
+        return -1;
     }
 
-	if (!init()) {
-		return -1;
-	}
+    if (!init()) {
+        return -1;
+    }
 
     if (is_daemon)
         daemon(0, 0);
 
     server = socks5_server_new(host, port);
     if (!server) {
-		ERROR("Couldn't create tiksock server.");
-		return -1;
+        ERROR("Couldn't create tiksock server.");
+        return -1;
     }
 
-	INFO("Start tiksock server.");
+    INFO("Start tiksock server.");
 
     socks5_server_run(server);
 
     socks5_server_exit(server);
 
-	deinit();
+    deinit();
 
     return 0;
 }

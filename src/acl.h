@@ -10,8 +10,8 @@ typedef struct ipv4_cidr {
 }ipv4_cidr_t;
 
 typedef struct acl_rule {
-	ipv4_cidr_t cidr;
-	int action;
+    ipv4_cidr_t cidr;
+    int action;
 } acl_rule_t;
 
 #define LEAFTYPE   acl_rule_t *

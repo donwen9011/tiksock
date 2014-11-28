@@ -50,10 +50,10 @@ int load_conf(char *file)
     int i = 0;
 
     fd = fopen(file, "r");
-	if (!fd) {
-		printf("Couldn't load configuration file: %s\n", file);
-		return 0;
-	}
+    if (!fd) {
+        printf("Couldn't load configuration file: %s\n", file);
+        return 0;
+    }
 
     while (fgets(line, 1024, fd)) {
 
@@ -113,9 +113,9 @@ ADD_TO_DISPATCH_TABLE("daemon", cmd_daemon);
 void cmd_rule(int argc, char **argv)
 {
     if (strcmp(argv[0], "pass") == 0)
-		acl_add_rule2(acl_db, 1, argv[1]);
+        acl_add_rule2(acl_db, 1, argv[1]);
     else
-		acl_add_rule2(acl_db, 0, argv[1]);
+        acl_add_rule2(acl_db, 0, argv[1]);
 }
 
 ADD_TO_DISPATCH_TABLE("rule", cmd_rule);

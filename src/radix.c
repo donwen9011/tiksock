@@ -193,7 +193,7 @@ LEAFTYPE radix_add(struct ROOTSTRUCT * tree, LEAFTYPE leaf, EXTRA_ARG aux, int s
                     SET_LEAF(node, 1 - dir);
                     parent->child[dir2].node = node;
                     SET_NODE(parent, dir2);
-					break;
+                    break;
                 } else {
                     child = parent->child[dir2].node;
                     if (node->critbit < child->critbit) {
